@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>transform:rotation</title>
+</head>
+<body>
+    <h3>클릭하면 90도 회전합니다.</h3>
+    <hr>
+    <img src="./assets/spongebob.png" alt="spongebob" width="100px" height="100px">
+    <script>
+        const img = document.getElementsByTagName("img")[0];
+        img.addEventListener("click", rotate90Degree);
+        let degree = 0;
+        function rotate90Degree(e) {
+            degree += 90;
+            e.target.style.transform = `rotate(${degree}deg)`;
+        }
+    </script>
+</body>
+</html>
