@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>라디오 버튼과 이미지 출력</title>
+</head>
+<body>
+    <h3>라디오 버튼을 클릭하면 이미지를 출력합니다.</h3>
+    <hr>
+    <form>
+        <input type="radio" name="fruit" id="banana" value="banana" checked>
+        <label for="banana">바나나</label>
+        <input type="radio" name="fruit" id="mango" value="mango">
+        <label for="mango">망고</label>
+        <input type="radio" name="fruit" id="apple" value="apple">
+        <label for="apple">사과</label>
+    </form>
+    <img src="./assets/banana.png" alt="" width="100px" height="100px">
+    <script>
+        const form = document.getElementsByTagName("form")[0];
+        const fruitImg = document.getElementsByTagName("img")[0];
+        const radioButtons = Array.from(document.getElementsByTagName("input")).filter((element) => element.attributes.getNamedItem("type").value === "radio");
+        radioButtons.forEach((radioButton) => {
+            radioButton.addEventListener("click", changeFruitImg);
+        });
+        function changeFruitImg(e) {
+            if (e.target.checked) {
+                const fruit = e.target.value;
+                fruitImg.src = `./assets/${fruit}.png`;
+                fruitImg.alt = fruit;
+            }
+        }
+        form.addEventListener("submit", (e) => e.preventDefault());
+    </script>
+</body>
+</html>
