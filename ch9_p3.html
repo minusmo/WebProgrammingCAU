@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>onkeydown</title>
+    <style>
+        div {
+            height: 10px;
+        }
+        label {
+            width: 10px;
+            height: inherit;
+        }
+        input {
+            width: auto;
+            height: inherit;
+        }
+        #expression {
+            border: 2px solid black;
+        }
+        #value {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h3>계산기 만들기</h3>
+    <hr>
+    <h5>수식을 입력하고 &#60;Enter&#62;를 입력하세요.</h5>
+    <main>
+        <div>
+            <label for="expression">식</label>
+            <input type="text" name="expression" id="expression">
+        </div>
+        <br>
+        <div>
+            <label for="value">값</label>
+            <input type="text" id="value"></input>
+        </div>
+    </main>
+    <script>
+        const expression = document.getElementById("expression");
+        const resultText = document.getElementById("value");
+        
+        expression.addEventListener("keydown",evaluateExpression);
+        function evaluateExpression(e) {
+            const expressionString = e.target.value;
+            if (e.key == "Enter") {
+                const evaluation = new Function("return " + expressionString + ";");
+                resultText.value = evaluation();
+            }
+        }
+    </script>
+</body>
+</html>
