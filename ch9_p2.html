@@ -19,7 +19,9 @@
     <script>
         const form = document.getElementsByTagName("form")[0];
         const fruitImg = document.getElementsByTagName("img")[0];
-        const radioButtons = Array.from(document.getElementsByTagName("input")).filter((element) => element.attributes.getNamedItem("type").value === "radio");
+        const radioButtons = Array.from(document.getElementsByTagName("input"))
+        .filter((element) => element.attributes.getNamedItem("type").value === "radio");
+        
         radioButtons.forEach((radioButton) => {
             radioButton.addEventListener("click", changeFruitImg);
         });

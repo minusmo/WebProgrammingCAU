@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>계산기 만들기</title>
+    <style>
+        input {
+            margin: 0 auto;
+            display: block;
+            width: 95%;
+            border: 2px solid black;
+        }
+        .col {
+            margin: 5px auto;
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            row-gap: 5px;
+        }
+        .row {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+        }
+        button {
+            width: 10%;
+            min-width: 4ch;
+        }
+    </style>
+</head>
+<body>
+    <h3>계산기 만들기</h3>
+    <hr>
+    <input type="text" name="expressionInput" id="expressionInput" value="0">
+    <div class="col">
+        <div class="row">
+            <button id="back" class="btn-calc">Back</button>
+            <button id="ce" class="btn-clear">CE</button>
+            <button id="c" class="btn-clear">C</button>
+            <button id="=" class="btn-evaluation">=</button>
+        </div>
+        <div class="row">
+            <button class="btn-num">7</button>
+            <button class="btn-num">8</button>
+            <button class="btn-num">9</button>
+            <button id="/" class="btn-operator">/</button>
+        </div>
+        <div class="row">
+            <button class="btn-num">4</button>
+            <button class="btn-num">5</button>
+            <button class="btn-num">6</button>
+            <button id="*" class="btn-operator">*</button>
+        </div>
+        <div class="row">
+            <button class="btn-num">1</button>
+            <button class="btn-num">2</button>
+            <button class="btn-num">3</button>
+            <button id="-" class="btn-operator">-</button>
+        </div>
+        <div class="row">
+            <button class="btn-num">0</button>
+            <button id="+" class="btn-operator">+</button>
+            <button class="btn-calc">NONE</button>
+            <button class="btn-calc">NONE</button>
+        </div>
+    </div>
+    <script>
+       const expressionInput = document.getElementById("expressionInput");
+       const backBtn = document.getElementById("back");
+       const evaluationBtn = document.getElementById("=");
+       const clearBtns = document.getElementsByClassName("btn-clear");
+       const operators = document.getElementsByClassName("btn-operator");
+       const numBtns = document.getElementsByClassName("btn-num");
+
+       backBtn.addEventListener("click", removeOneFromBack);
+       function removeOneFromBack(e) {
+        const expression = expressionInput.value;
+        expressionInput.value = expression.substring(0,expression.length - 1);
+       }
+       Array.from(clearBtns).forEach(clearBtn => {
+        clearBtn.addEventListener("click", clearExpression);
+       });
+       function clearExpression(e) {
+        expressionInput.value = "0";
+       }
+       Array.from(operators).forEach(operator => {
+        operator.addEventListener("click", appendOperator);
+       })
+       function appendOperator(e) {
+        expressionInput.value += e.target.textContent;
+       }
+       Array.from(numBtns).forEach(numBtn => {
+        numBtn.addEventListener("click", appendNumber);
+       })
+       function appendNumber(e) {
+        expressionInput.value += e.target.textContent;
+       }
+       evaluationBtn.addEventListener("click", evaluateExpression);
+       function evaluateExpression(e) {
+         const expression = expressionInput.value;
+         const getResult = new Function("return "+expression+";");
+         expressionInput.value = getResult();
+       }
+    </script>
+</body>
+</html>
